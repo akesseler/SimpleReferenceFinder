@@ -1,3 +1,14 @@
+<p align="center">
+  <a href="https://github.com/akesseler/SimpleReferenceFinder/blob/master/LICENSE.md" alt="license">
+    <img src="https://img.shields.io/github/license/akesseler/SimpleReferenceFinder.svg" />
+  </a>
+  <a href="https://github.com/akesseler/SimpleReferenceFinder/releases/latest" alt="latest">
+    <img src="https://img.shields.io/github/release/akesseler/SimpleReferenceFinder.svg" />
+  </a>
+  <a href="https://github.com/akesseler/SimpleReferenceFinder/archive/master.zip" alt="master">
+    <img src="https://img.shields.io/github/languages/code-size/akesseler/SimpleReferenceFinder.svg" />
+  </a>
+</p>
 
 # Simple Reference Finder
 
