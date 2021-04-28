@@ -30,6 +30,7 @@ using Plexdata.SimpleReferenceFinder.Generators;
 using Plexdata.SimpleReferenceFinder.Interfaces;
 using Plexdata.SimpleReferenceFinder.Models;
 using Plexdata.SimpleReferenceFinder.Runners;
+using Plexdata.SimpleReferenceFinder.Settings;
 using Plexdata.SimpleReferenceFinder.Utilities;
 using Plexdata.Utilities.Attributes;
 using Plexdata.Utilities.Attributes.Extensions;
@@ -76,12 +77,14 @@ namespace Plexdata.SimpleReferenceFinder
         protected override void OnLoad(EventArgs args)
         {
             this.SetupControls();
+            this.LoadSettings();
             base.OnLoad(args);
         }
 
         protected override void OnClosing(CancelEventArgs args)
         {
             this.CancelExecution();
+            this.SaveSettings();
             base.OnClosing(args);
         }
 
@@ -265,8 +268,52 @@ namespace Plexdata.SimpleReferenceFinder
 
             this.ReportMessage(null);
             this.SetErrorCount(0);
+        }
 
-            this.SetDebugSearchOptions();
+        private void LoadSettings()
+        {
+            try
+            {
+                SearchOptions settings = SettingsManager.Load<SearchOptions>();
+
+                this.txtBaseFolder.Text = settings.BaseFolder;
+                this.txtSourcePattern.Text = settings.GetStringFromSearchPatterns(settings.SourcePatterns);
+                this.txtTargetPattern.Text = settings.GetStringFromSearchPatterns(settings.TargetPatterns);
+                this.chkCaseSensitive.Checked = settings.CaseSensitive;
+                this.chkSearchRecursive.Checked = settings.SearchRecursive;
+                this.chkIncludeFolder.Checked = settings.IncludeFolder;
+                this.chkChangeSeparator.Checked = settings.ChangeSeparator;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(this,
+                    String.Format("Something went wrong while loading settings.{0}{0}{1}", Environment.NewLine, exception.Message),
+                    this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SaveSettings()
+        {
+            try
+            {
+                SearchOptions settings = new SearchOptions();
+
+                settings.BaseFolder = this.txtBaseFolder.Text.Trim();
+                settings.SourcePatterns = settings.GetSearchPatternsFromString(this.txtSourcePattern.Text.Trim());
+                settings.TargetPatterns = settings.GetSearchPatternsFromString(this.txtTargetPattern.Text.Trim());
+                settings.CaseSensitive = this.chkCaseSensitive.Checked;
+                settings.SearchRecursive = this.chkSearchRecursive.Checked;
+                settings.IncludeFolder = this.chkIncludeFolder.Checked;
+                settings.ChangeSeparator = this.chkChangeSeparator.Checked;
+
+                SettingsManager.Save<SearchOptions>(settings);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(this,
+                    String.Format("Something went wrong while saving settings.{0}{0}{1}", Environment.NewLine, exception.Message),
+                    this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private IEnumerable<Object> GetSearchTypeDataSource()
@@ -328,6 +375,7 @@ namespace Plexdata.SimpleReferenceFinder
             searchOptions.CaseSensitive = this.chkCaseSensitive.Checked;
             searchOptions.SearchRecursive = this.chkSearchRecursive.Checked;
             searchOptions.IncludeFolder = this.chkIncludeFolder.Checked;
+            searchOptions.ChangeSeparator = this.chkChangeSeparator.Checked;
 
             return true;
         }
@@ -588,18 +636,6 @@ namespace Plexdata.SimpleReferenceFinder
                     this.otherErrors.Add(error);
                 }
             }
-        }
-
-        #endregion
-
-        #region Debug Helpers
-
-        [Conditional("DEBUG")]
-        private void SetDebugSearchOptions()
-        {
-            this.txtBaseFolder.Text = @"C:\Temp\SearchReference\BaseFolder";
-            this.txtSourcePattern.Text = "*.aspx;*.ascx";
-            this.txtTargetPattern.Text = "*.aspx;*.ascx";
         }
 
         #endregion
