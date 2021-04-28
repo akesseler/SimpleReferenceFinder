@@ -99,6 +99,8 @@ namespace Plexdata.SimpleReferenceFinder.Models
 
         public Boolean IncludeFolder { get; set; }
 
+        public Boolean ChangeSeparator { get; set; }
+
         public String GetBaseFolder()
         {
             return this.BaseFolder.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
@@ -123,9 +125,16 @@ namespace Plexdata.SimpleReferenceFinder.Models
 
             if (this.IncludeFolder)
             {
-                return source.FullName
+                String result = source.FullName
                     .Replace(folder, String.Empty)
                     .TrimStart(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+
+                if (this.ChangeSeparator)
+                {
+                    result = result.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+                }
+
+                return result;
             }
             else
             {

@@ -52,11 +52,11 @@ namespace Plexdata.SimpleReferenceFinder.Models
 
             if (briefly || this.Column < 0)
             {
-                builder.AppendFormat("{0:N0}", this.Line);
+                builder.AppendFormat("{0}", this.Line);
             }
             else
             {
-                builder.AppendFormat("{0:N0}:{1:N0}", this.Line, this.Column);
+                builder.AppendFormat("{0}:{1}", this.Line, this.Column);
             }
 
             return builder.ToString();

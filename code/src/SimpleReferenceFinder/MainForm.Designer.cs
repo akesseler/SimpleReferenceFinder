@@ -66,6 +66,7 @@ namespace Plexdata.SimpleReferenceFinder
             this.tbsSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tbbInfo = new System.Windows.Forms.ToolStripButton();
             this.grpOptions = new System.Windows.Forms.GroupBox();
+            this.chkChangeSeparator = new Plexdata.SimpleReferenceFinder.Controls.SwitchBox();
             this.chkIncludeFolder = new Plexdata.SimpleReferenceFinder.Controls.SwitchBox();
             this.lblTargetPattern = new System.Windows.Forms.Label();
             this.txtTargetPattern = new System.Windows.Forms.TextBox();
@@ -230,6 +231,7 @@ namespace Plexdata.SimpleReferenceFinder
             // 
             this.grpOptions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpOptions.Controls.Add(this.chkChangeSeparator);
             this.grpOptions.Controls.Add(this.chkIncludeFolder);
             this.grpOptions.Controls.Add(this.lblTargetPattern);
             this.grpOptions.Controls.Add(this.txtTargetPattern);
@@ -249,6 +251,27 @@ namespace Plexdata.SimpleReferenceFinder
             this.grpOptions.TabIndex = 1;
             this.grpOptions.TabStop = false;
             this.grpOptions.Text = "Options";
+            // 
+            // chkChangeSeparator
+            // 
+            this.chkChangeSeparator.AutoSize = true;
+            this.chkChangeSeparator.Checked = true;
+            this.chkChangeSeparator.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkChangeSeparator.Location = new System.Drawing.Point(514, 141);
+            this.chkChangeSeparator.Name = "chkChangeSeparator";
+            this.chkChangeSeparator.Size = new System.Drawing.Size(141, 17);
+            this.chkChangeSeparator.SwitchSettings.HandleFillingOn = System.Drawing.Color.White;
+            this.chkChangeSeparator.SwitchSettings.HandleOutlineOn = System.Drawing.Color.White;
+            this.chkChangeSeparator.SwitchSettings.HandleOutlineWidth = 0F;
+            this.chkChangeSeparator.SwitchSettings.HandlePercent = 90;
+            this.chkChangeSeparator.SwitchSettings.SliderFillingOn = System.Drawing.Color.DimGray;
+            this.chkChangeSeparator.SwitchSettings.SliderOutlineOn = System.Drawing.Color.DimGray;
+            this.chkChangeSeparator.SwitchSettings.SliderOutlineWidth = 0F;
+            this.chkChangeSeparator.SwitchSettings.SliderPercent = 100;
+            this.chkChangeSeparator.TabIndex = 12;
+            this.chkChangeSeparator.Text = "Change &Separator";
+            this.tipMain.SetToolTip(this.chkChangeSeparator, "Switch on to change path separator \'\\\' into \'/\'.");
+            this.chkChangeSeparator.UseVisualStyleBackColor = true;
             // 
             // chkIncludeFolder
             // 
@@ -567,7 +590,7 @@ namespace Plexdata.SimpleReferenceFinder
             this.Controls.Add(this.grpOptions);
             this.Controls.Add(this.tbsMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(600, 600);
+            this.MinimumSize = new System.Drawing.Size(750, 600);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Simple Reference Finder";
@@ -632,6 +655,7 @@ namespace Plexdata.SimpleReferenceFinder
         private System.Windows.Forms.ContextMenuStrip cmsList;
         private System.Windows.Forms.ToolStripMenuItem mnuCopyOne;
         private System.Windows.Forms.ToolStripMenuItem mnuCopyAll;
+        private Controls.SwitchBox chkChangeSeparator;
     }
 }
 

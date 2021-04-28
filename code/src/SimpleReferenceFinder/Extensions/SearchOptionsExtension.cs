@@ -24,6 +24,7 @@
 
 using Plexdata.SimpleReferenceFinder.Models;
 using System;
+using System.Linq;
 
 namespace Plexdata.SimpleReferenceFinder.Extensions
 {
@@ -39,6 +40,16 @@ namespace Plexdata.SimpleReferenceFinder.Extensions
             }
 
             return values.Split(SearchOptionsExtension.SearchPatternSplits, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        public static String GetStringFromSearchPatterns(this SearchOptions options, String[] values)
+        {
+            if (values == null || values.Length < 1)
+            {
+                return String.Empty;
+            }
+
+            return String.Join("; ", values.Select(x => x.Trim()).Where(x => !String.IsNullOrEmpty(x)));
         }
     }
 }
