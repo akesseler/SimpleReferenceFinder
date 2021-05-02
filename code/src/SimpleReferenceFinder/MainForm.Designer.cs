@@ -64,7 +64,9 @@ namespace Plexdata.SimpleReferenceFinder
             this.tbsSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnReport = new System.Windows.Forms.ToolStripButton();
             this.tbsSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.tbbInfo = new System.Windows.Forms.ToolStripButton();
+            this.tbbInfo = new System.Windows.Forms.ToolStripDropDownButton();
+            this.mnuInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.grpOptions = new System.Windows.Forms.GroupBox();
             this.chkChangeSeparator = new Plexdata.SimpleReferenceFinder.Controls.SwitchBox();
             this.chkIncludeFolder = new Plexdata.SimpleReferenceFinder.Controls.SwitchBox();
@@ -88,8 +90,12 @@ namespace Plexdata.SimpleReferenceFinder
             this.hdrReferencedCount = new System.Windows.Forms.ColumnHeader();
             this.hdrReferencedLines = new System.Windows.Forms.ColumnHeader();
             this.cmsList = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuShowResult = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuCopyOne = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCopyAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuOpenFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.lstUnreferenced = new Plexdata.SimpleReferenceFinder.Controls.SearchResultListView();
             this.hdrUnreferencedFile = new System.Windows.Forms.ColumnHeader();
             this.hdrUnreferencedPath = new System.Windows.Forms.ColumnHeader();
@@ -217,15 +223,32 @@ namespace Plexdata.SimpleReferenceFinder
             // tbbInfo
             // 
             this.tbbInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbbInfo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuInfo,
+            this.mnuHelp});
             this.tbbInfo.Image = global::Plexdata.SimpleReferenceFinder.Properties.Resources.info_24x24;
-            this.tbbInfo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tbbInfo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbbInfo.Name = "tbbInfo";
             this.tbbInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tbbInfo.Size = new System.Drawing.Size(34, 34);
+            this.tbbInfo.Size = new System.Drawing.Size(43, 34);
             this.tbbInfo.Text = "Info";
-            this.tbbInfo.ToolTipText = "Show program info box.";
-            this.tbbInfo.Click += new System.EventHandler(this.OnButtonInfoClick);
+            this.tbbInfo.ToolTipText = "Show info or help.";
+            // 
+            // mnuInfo
+            // 
+            this.mnuInfo.Name = "mnuInfo";
+            this.mnuInfo.Size = new System.Drawing.Size(108, 22);
+            this.mnuInfo.Text = "&Info...";
+            this.mnuInfo.ToolTipText = "Show program info box.";
+            this.mnuInfo.Click += new System.EventHandler(this.OnMenuAboutClick);
+            // 
+            // mnuHelp
+            // 
+            this.mnuHelp.Name = "mnuHelp";
+            this.mnuHelp.Size = new System.Drawing.Size(108, 22);
+            this.mnuHelp.Text = "&Help...";
+            this.mnuHelp.ToolTipText = "Show program help.";
+            this.mnuHelp.Click += new System.EventHandler(this.OnMenuHelpClick);
             // 
             // grpOptions
             // 
@@ -486,25 +509,53 @@ namespace Plexdata.SimpleReferenceFinder
             // cmsList
             // 
             this.cmsList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuShowResult,
+            this.mnuSeparator1,
             this.mnuCopyOne,
-            this.mnuCopyAll});
+            this.mnuCopyAll,
+            this.mnuSeparator2,
+            this.mnuOpenFolder});
             this.cmsList.Name = "cmsList";
-            this.cmsList.Size = new System.Drawing.Size(189, 48);
+            this.cmsList.Size = new System.Drawing.Size(202, 104);
             this.cmsList.Opening += new System.ComponentModel.CancelEventHandler(this.OnContextMenuListOpening);
+            // 
+            // mnuShowResult
+            // 
+            this.mnuShowResult.Name = "mnuShowResult";
+            this.mnuShowResult.Size = new System.Drawing.Size(201, 22);
+            this.mnuShowResult.Text = "Show &Result Details";
+            this.mnuShowResult.Click += new System.EventHandler(this.OnMenuShowResultClick);
+            // 
+            // mnuSeparator1
+            // 
+            this.mnuSeparator1.Name = "mnuSeparator1";
+            this.mnuSeparator1.Size = new System.Drawing.Size(198, 6);
             // 
             // mnuCopyOne
             // 
             this.mnuCopyOne.Name = "mnuCopyOne";
-            this.mnuCopyOne.Size = new System.Drawing.Size(188, 22);
+            this.mnuCopyOne.Size = new System.Drawing.Size(201, 22);
             this.mnuCopyOne.Text = "&Copy to Clipboard";
             this.mnuCopyOne.Click += new System.EventHandler(this.OnMenuCopyOneClick);
             // 
             // mnuCopyAll
             // 
             this.mnuCopyAll.Name = "mnuCopyAll";
-            this.mnuCopyAll.Size = new System.Drawing.Size(188, 22);
+            this.mnuCopyAll.Size = new System.Drawing.Size(201, 22);
             this.mnuCopyAll.Text = "Copy &All to Clipboard";
             this.mnuCopyAll.Click += new System.EventHandler(this.OnMenuCopyAllClick);
+            // 
+            // mnuSeparator2
+            // 
+            this.mnuSeparator2.Name = "mnuSeparator2";
+            this.mnuSeparator2.Size = new System.Drawing.Size(198, 6);
+            // 
+            // mnuOpenFolder
+            // 
+            this.mnuOpenFolder.Name = "mnuOpenFolder";
+            this.mnuOpenFolder.Size = new System.Drawing.Size(201, 22);
+            this.mnuOpenFolder.Text = "&Open Containing Folder";
+            this.mnuOpenFolder.Click += new System.EventHandler(this.OnMenuOpenFolderClick);
             // 
             // lstUnreferenced
             // 
@@ -651,11 +702,17 @@ namespace Plexdata.SimpleReferenceFinder
         private System.Windows.Forms.ToolStripSeparator tbsSeparator2;
         private System.Windows.Forms.ToolStripButton btnReport;
         private System.Windows.Forms.ToolStripSeparator tbsSeparator3;
-        private System.Windows.Forms.ToolStripButton tbbInfo;
         private System.Windows.Forms.ContextMenuStrip cmsList;
         private System.Windows.Forms.ToolStripMenuItem mnuCopyOne;
         private System.Windows.Forms.ToolStripMenuItem mnuCopyAll;
         private Controls.SwitchBox chkChangeSeparator;
+        private System.Windows.Forms.ToolStripSeparator mnuSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem mnuOpenFolder;
+        private System.Windows.Forms.ToolStripMenuItem mnuShowResult;
+        private System.Windows.Forms.ToolStripSeparator mnuSeparator2;
+        private System.Windows.Forms.ToolStripDropDownButton tbbInfo;
+        private System.Windows.Forms.ToolStripMenuItem mnuInfo;
+        private System.Windows.Forms.ToolStripMenuItem mnuHelp;
     }
 }
 

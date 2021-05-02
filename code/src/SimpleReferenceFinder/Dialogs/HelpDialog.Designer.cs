@@ -24,7 +24,7 @@
 
 namespace Plexdata.SimpleReferenceFinder.Dialogs
 {
-    partial class SearchErrorDialog
+    partial class HelpDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -52,73 +52,54 @@ namespace Plexdata.SimpleReferenceFinder.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchErrorDialog));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HelpDialog));
             this.btnClose = new System.Windows.Forms.Button();
-            this.lstErrors = new System.Windows.Forms.ListView();
-            this.hdrError = new System.Windows.Forms.ColumnHeader();
-            this.hdrSource = new System.Windows.Forms.ColumnHeader();
+            this.htbContent = new Plexdata.SimpleReferenceFinder.Controls.HtmlTextBox();
             this.SuspendLayout();
             // 
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(597, 226);
+            this.btnClose.Location = new System.Drawing.Point(697, 426);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 0;
             this.btnClose.Text = "&Close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.OnButtonCloseClick);
             // 
-            // lstErrors
+            // htbContent
             // 
-            this.lstErrors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.htbContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstErrors.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.hdrError,
-            this.hdrSource});
-            this.lstErrors.FullRowSelect = true;
-            this.lstErrors.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.lstErrors.HideSelection = false;
-            this.lstErrors.LabelWrap = false;
-            this.lstErrors.Location = new System.Drawing.Point(12, 12);
-            this.lstErrors.MultiSelect = false;
-            this.lstErrors.Name = "lstErrors";
-            this.lstErrors.ShowItemToolTips = true;
-            this.lstErrors.Size = new System.Drawing.Size(660, 208);
-            this.lstErrors.TabIndex = 1;
-            this.lstErrors.UseCompatibleStateImageBehavior = false;
-            this.lstErrors.View = System.Windows.Forms.View.Details;
-            this.lstErrors.DoubleClick += new System.EventHandler(this.OnErrorsDoubleClick);
+            this.htbContent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.htbContent.Content = "";
+            this.htbContent.Location = new System.Drawing.Point(12, 12);
+            this.htbContent.Name = "htbContent";
+            this.htbContent.Size = new System.Drawing.Size(760, 408);
+            this.htbContent.TabIndex = 1;
+            this.htbContent.Text = "foo bar";
             // 
-            // hdrError
-            // 
-            this.hdrError.Text = "Error";
-            // 
-            // hdrSource
-            // 
-            this.hdrSource.Text = "Source";
-            // 
-            // SearchErrorDialog
+            // HelpDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(684, 261);
-            this.Controls.Add(this.lstErrors);
+            this.ClientSize = new System.Drawing.Size(784, 461);
+            this.Controls.Add(this.htbContent);
             this.Controls.Add(this.btnClose);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(500, 300);
-            this.Name = "SearchErrorDialog";
-            this.ShowInTaskbar = false;
+            this.MinimumSize = new System.Drawing.Size(400, 400);
+            this.Name = "HelpDialog";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Search Errors";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Help";
             this.ResumeLayout(false);
 
         }
@@ -126,8 +107,6 @@ namespace Plexdata.SimpleReferenceFinder.Dialogs
         #endregion
 
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.ListView lstErrors;
-        private System.Windows.Forms.ColumnHeader hdrSource;
-        private System.Windows.Forms.ColumnHeader hdrError;
+        private Controls.HtmlTextBox htbContent;
     }
 }

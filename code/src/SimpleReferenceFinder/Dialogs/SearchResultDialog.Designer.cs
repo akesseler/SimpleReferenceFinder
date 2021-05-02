@@ -208,6 +208,7 @@ namespace Plexdata.SimpleReferenceFinder.Dialogs
             this.Controls.Add(this.grpSource);
             this.Controls.Add(this.grpReferences);
             this.Controls.Add(this.btnClose);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;

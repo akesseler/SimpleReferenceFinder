@@ -161,6 +161,7 @@ namespace Plexdata.SimpleReferenceFinder.Dialogs
             this.Controls.Add(this.lblProduct);
             this.Controls.Add(this.picLogo);
             this.Controls.Add(this.btnClose);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
