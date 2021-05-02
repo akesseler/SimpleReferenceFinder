@@ -160,10 +160,9 @@ namespace Plexdata.SimpleReferenceFinder
 
                     String reportContent = reportGenerator.Generate(this.searchReport);
 
-                    using (StreamWriter writer = new StreamWriter(dialog.FileName))
-                    {
-                        writer.Write(reportContent);
-                    }
+                    using StreamWriter writer = new StreamWriter(dialog.FileName);
+
+                    writer.Write(reportContent);
                 }
             }
             finally
@@ -172,10 +171,15 @@ namespace Plexdata.SimpleReferenceFinder
             }
         }
 
-        private void OnButtonInfoClick(Object sender, EventArgs args)
+        private void OnMenuAboutClick(Object sender, EventArgs args)
         {
             InfoDialog dialog = new InfoDialog();
             dialog.ShowDialog(this);
+        }
+
+        private void OnMenuHelpClick(Object sender, EventArgs args)
+        {
+            HelpDialog.Display();
         }
 
         private void OnButtonBaseFolderClick(Object sender, EventArgs args)
@@ -215,8 +219,24 @@ namespace Plexdata.SimpleReferenceFinder
             {
                 if (source.SourceControl is SearchResultListView control)
                 {
+                    this.mnuShowResult.Enabled = control == this.lstReferenced && control.HasSelectedResult;
                     this.mnuCopyOne.Enabled = control.HasSelectedResult;
                     this.mnuCopyAll.Enabled = control.HasAvailableResults;
+                    this.mnuOpenFolder.Enabled = control.HasSelectedResult;
+                }
+            }
+        }
+
+        private void OnMenuShowResultClick(Object sender, EventArgs args)
+        {
+            if (sender is ToolStripMenuItem source)
+            {
+                if (source.Owner is ContextMenuStrip owner)
+                {
+                    if (owner.SourceControl is SearchResultListView control)
+                    {
+                        this.OnReferencedDoubleClick(this.lstReferenced, EventArgs.Empty);
+                    }
                 }
             }
         }
@@ -244,6 +264,29 @@ namespace Plexdata.SimpleReferenceFinder
                     if (owner.SourceControl is SearchResultListView control)
                     {
                         try { Clipboard.SetText(control.AvailableResults.ToClipboard()); } catch { }
+                    }
+                }
+            }
+        }
+
+        private void OnMenuOpenFolderClick(Object sender, EventArgs args)
+        {
+            if (sender is ToolStripMenuItem source)
+            {
+                if (source.Owner is ContextMenuStrip owner)
+                {
+                    if (owner.SourceControl is SearchResultListView control)
+                    {
+                        try
+                        {
+                            Process.Start(new ProcessStartInfo()
+                            {
+                                Verb = "open",
+                                FileName = $"\"{control.SelectedResult.File.DirectoryName}\"",
+                                UseShellExecute = true,
+                            });
+                        }
+                        catch { }
                     }
                 }
             }
@@ -296,15 +339,17 @@ namespace Plexdata.SimpleReferenceFinder
         {
             try
             {
-                SearchOptions settings = new SearchOptions();
+                SearchOptions settings = new SearchOptions()
+                {
+                    BaseFolder = this.txtBaseFolder.Text.Trim(),
+                    CaseSensitive = this.chkCaseSensitive.Checked,
+                    SearchRecursive = this.chkSearchRecursive.Checked,
+                    IncludeFolder = this.chkIncludeFolder.Checked,
+                    ChangeSeparator = this.chkChangeSeparator.Checked
+                };
 
-                settings.BaseFolder = this.txtBaseFolder.Text.Trim();
                 settings.SourcePatterns = settings.GetSearchPatternsFromString(this.txtSourcePattern.Text.Trim());
                 settings.TargetPatterns = settings.GetSearchPatternsFromString(this.txtTargetPattern.Text.Trim());
-                settings.CaseSensitive = this.chkCaseSensitive.Checked;
-                settings.SearchRecursive = this.chkSearchRecursive.Checked;
-                settings.IncludeFolder = this.chkIncludeFolder.Checked;
-                settings.ChangeSeparator = this.chkChangeSeparator.Checked;
 
                 SettingsManager.Save<SearchOptions>(settings);
             }

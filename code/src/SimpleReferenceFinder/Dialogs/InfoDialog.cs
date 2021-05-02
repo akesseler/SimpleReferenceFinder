@@ -25,7 +25,6 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Plexdata.SimpleReferenceFinder.Dialogs
@@ -51,27 +50,15 @@ namespace Plexdata.SimpleReferenceFinder.Dialogs
 
         private void OnLogoClick(Object sender, EventArgs args)
         {
-            // WTF... See https://stackoverflow.com/a/43232486
-
-            String url = "http://www.plexdata.de/";
-
-            // HACK: See https://github.com/dotnet/corefx/issues/10361
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            // See https://stackoverflow.com/a/43232486
+            // See https://github.com/dotnet/corefx/issues/10361
+            // But this should be enough at least on Windows.
+            Process.Start(new ProcessStartInfo()
             {
-                Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}") { CreateNoWindow = true });
-            }
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            {
-                Process.Start("xdg-open", url);
-            }
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-            {
-                Process.Start("open", url);
-            }
-            else
-            {
-                throw new NotSupportedException();
-            }
+                Verb = "open",
+                FileName = "http://www.plexdata.de/",
+                UseShellExecute = true,
+            });
         }
 
         #endregion

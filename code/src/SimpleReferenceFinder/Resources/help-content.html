@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+    <title>Program Help</title>
+    <style>
+        body {
+            font: normal 1em sans-serif;
+            margin: 2em;
+        }
+
+        h1 {
+            font-size: 1.4em;
+            color: #2E74B5;
+        }
+
+        h2 {
+            font-size: 1.2em;
+            color: #2E74B5;
+            font-style: italic;
+        }
+
+        h3 {
+            font-size: 1em;
+        }
+
+        p {
+            line-height: 1.5em;
+        }
+
+        code {
+            font-family: "Consolas", "Lucida Console", monospace;
+        }
+
+        ul.plain {
+            list-style-type: none;
+            padding: 0em 0em 0em 1.5em;
+            margin: 0;
+        }
+
+        ul.page-toc {
+            padding: 0pt;
+            margin-left: 0pt;
+            list-style: none;
+            margin-bottom: 2em;
+        }
+
+        ul.page-toc a {
+            text-decoration: none;
+        }
+
+        ul.page-toc a:hover {
+            text-decoration: underline;
+        }
+
+        ul.page-sub-toc {
+            padding: 0pt;
+            margin-left: 1em;
+            list-style: none;
+        }
+
+        .nowrap {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="program-help">Program Help</h1>
+    <p>
+        In this help you may find some interesting and hopefully useful information how to use the program.
+        See below for the list of possible sections.
+    </p>
+
+    <ul class="page-toc">
+        <li>
+            <a href="#basic-settings">Basic Settings</a>
+            <ul class="page-sub-toc">
+                <li><a href="#basic-settings-search-type">Search Type</a></li>
+                <li><a href="#basic-settings-base-folder">Base Folder</a></li>
+                <li><a href="#basic-settings-search-patterns">Search Patterns</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#search-options">Search Options</a>
+            <ul class="page-sub-toc">
+                <li><a href="#search-options-case-sensitive">Case Sensitive</a></li>
+                <li><a href="#search-options-search-recursive">Search Recursive</a></li>
+                <li><a href="#search-options-include-folder">Include Folder</a></li>
+                <li><a href="#search-options-change-separator">Change Separator</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <h1 id="basic-settings">Basic Settings</h1>
+    <h2 id="basic-settings-search-type">Search Type</h2>
+    <p>First of all choose an appropriated <em>Search Type</em>. Available search types are:</p>
+    <h3>Resolve references of files in other files.</h3>
+    <p>
+        The references of a list of input files is be resolved within the list of target file. The list
+        of input files is determined by provided <em>Source Patterns</em> and the list of target files
+        is determined by provided <em>Target Patterns</em>. Unfortunately, at the moment only the search
+        type <em>Resolve references of files in other files.</em> is possible.
+    </p>
+    <h2 id="basic-settings-base-folder">Base Folder</h2>
+    <p>
+        As next choose the <em>Base Folder</em> from where to start searching. The path must exist but can
+        be selected by clicking button <code>[...]</code> next to the right of the edif box.
+    </p>
+    <h2 id="basic-settings-search-patterns">Search Patterns</h2>
+    <p>
+        Thereafter, provide a semicolon separated list of search patterns (for example, some file extensions
+        with wildcards) as <em>Source Patterns</em> as well as <em>Target Patterns</em>. Standard wildcards
+        such as <code>*</code> and <code>?</code> are supported. Standard <q>all files</q> search patterns
+        <code>*.*</code> are used if not search patterns are defined.
+    </p>
+    <h1 id="search-options">Search Options</h1>
+    <h2 id="search-options-case-sensitive">Case Sensitive</h2>
+    <p>
+        Any string comparison to find fitting results is performed case sensitive if this option is
+        switched <em>ON</em>. Otherwise string comparison takes place ignoring character casing.
+    </p>
+    <h2 id="search-options-search-recursive">Search Recursive</h2>
+    <p>
+        Searching for file takes place in each folder and sub&ndash;folder if this option is switched
+        <em>ON</em>. Otherwise file searching is performed inside the <em>Base Folder</em> only.
+    </p>
+    <h2 id="search-options-include-folder">Include Folder</h2>
+    <p>
+        This switch allows to enable or disable the inclusion of partial sub&ndash;folder names. An
+        example should be useful to understand how it works.
+    </p>
+    <h3>Example</h3>
+    <p>Consider folder structure below.</p>
+    <ul class="plain nowrap">
+        <li>
+            <code>c:\base-folder</code>
+            <ul class="plain nowrap">
+                <li><code>file-1.ext</code></li>
+                <li><code>file-2.ext</code></li>
+                <li>
+                    <code>sub-folder-a</code>
+                    <ul class="plain nowrap">
+                        <li><code>file-a1.ext</code></li>
+                        <li><code>file-a2.ext</code></li>
+                        <li><code>file-a3.ext</code></li>
+                    </ul>
+                </li>
+                <li>
+                    <code>sub-folder-b</code>
+                    <ul class="plain nowrap">
+                        <li><code>file-b1.ext</code></li>
+                        <li><code>file-b2.ext</code></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <p>Scanning for affected source files returns this list of file names.</p>
+    <ul class="plain nowrap">
+        <li><code>c:\base-folder\file-1.ext</code></li>
+        <li><code>c:\base-folder\file-2.ext</code></li>
+        <li><code>c:\base-folder\sub-folder-a\file-a1.ext</code></li>
+        <li><code>c:\base-folder\sub-folder-a\file-a2.ext</code></li>
+        <li><code>c:\base-folder\sub-folder-a\file-a3.ext</code></li>
+        <li><code>c:\base-folder\sub-folder-b\file-b1.ext</code></li>
+        <li><code>c:\base-folder\sub-folder-b\file-b2.ext</code></li>
+    </ul>
+    <p>
+        The analyze action takes each of the fully qualified file names from scanning result and tries to
+        find current file name in each of the target files. As soon as the content analysis comes to file
+        <code>c:\base-folder\sub-folder-a\file-a2.ext</code>, its <em>Base Folder</em> part
+        <code>c:\base-folder\</code> is removed which in turn results in <code>sub-folder-a\file-a2.ext</code>.
+        And this string represents the actual search string!
+    </p>
+    <h3>Conclusion</h3>
+    <p>
+        The actual search string for the example above is <code>sub-folder-a\file-a2.ext</code> if option
+        <em>Include Folder</em> is switched <em>ON</em>. In contrast to that, the actual search string for the
+        example above is <code>file-a2.ext</code> if option <em>Include Folder</em> is switched <em>OFF</em>.
+    </p>
+    <h2 id="search-options-change-separator">Change Separator</h2>
+    <p>
+        This switch allows to enable or disable the replacement of each path separator. In other words, the
+        platform&ndash;specific path separator is replaced by its alternative path separator representation.
+    </p>
+    <p>
+        On Windows systems it means that the path separator &apos;<code>\</code>&apos; is replaced by
+        &apos;<code>/</code>&apos;. On Linux systems it means that the path separator &apos;<code>/</code>&apos;
+        is replaced by &apos;<code>/</code>&apos;, witch is actually the same character.
+    </p>
+    <p>Therefore, this switch is useful to find for example <code>sub-folder/file-name.ext</code> references.</p>
+    <p style="margin-bottom: 10em;" />
+</body>
+</html>
